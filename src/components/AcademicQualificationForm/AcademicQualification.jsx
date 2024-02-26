@@ -53,44 +53,28 @@ const AcademicQualification = () => {
         }
     }
 
-    const handlePostSemesterChange = (e) => {
-        const selectedValue = e.target.value;
-
-        if (selectedValue === '1') {
-            setSelectedPostSemester('1');
-        } else if (selectedValue === '2') {
-            setSelectedPostSemester('2');
-        } else if (selectedValue === '3') {
-            setSelectedPostSemester('3');
-        } else if (selectedValue === '4') {
-            setSelectedPostSemester('4');
-        } else if (selectedValue === '5') {
-            setSelectedPostSemester('5');
-        } else if (selectedValue === '6') {
-            setSelectedPostSemester('6');
-        } else if (selectedValue === '7') {
-            setSelectedPostSemester('7');
-        } else if (selectedValue === '8') {
-            setSelectedPostSemester('8');
+    const handleInputChange = (field, value) => {
+        if (field === 'selectedPostSemester') {
+            if (value === '1' || value === '2' || value === '3' || value === '4' || value === '5' || value === '6' || value === '7' || value === '8') {
+                setSelectedPostSemester(value);
+            } else {
+                setSelectedPostSemester('');
+            }
+        } else if (field === 'selectedPostDegree') {
+            setSelectedPostDegree(value);
         }
-        else {
-            setSelectedPostSemester(selectedValue)
-        }
-    }
+    };
+    
 
     const handlePostAddSemester = (e) => {
         e.preventDefault();
-        setPostAddSemester((prevsection) => [
-            ...prevsection,
-            {
-                select: '',
-                percentage: '',
-                maxPercentage: ''
-            }
-        ])
-    }
+        setPostAddSemester((prevSections) => [
+            ...prevSections,
+            { select: '', percentage: '', maxPercentage: '' },
+        ]);
+    };
 
-    const handleRemoveSem = (e,index) => {
+    const handleRemoveSem = (e, index) => {
         e.preventDefault();
         setPostAddSemester((prevSections) =>
             prevSections.filter((_, i) => i !== index)
@@ -142,15 +126,15 @@ const AcademicQualification = () => {
 
     return (
         <div>
-            <h1 className='text-base font-medium m-1 mt-4 md:ml-3'>Academic Qualification</h1>
-            <hr className='border border-black m-1 md:ml-3 w-11/12' />
-            <form action='' method=''>
+            <h1 className='text-base font-medium mt-4'>Academic Qualification</h1>
+            <hr className='border border-gray-400 mt-1 mb-1 w-11/12 ' />
+            <form action='' method='' className='mt-4'>
                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Education Type:
                     <select
                         name='qualifyingdegree'
                         value={selectedGraduation}
                         onChange={handleGraduationChange}
-                        // required
+                        
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>
@@ -165,7 +149,7 @@ const AcademicQualification = () => {
                                 name='postinstitutename'
                                 value={selectedPostInstitute}
                                 onChange={handlePostInstituteChange}
-                                // required
+                                
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -184,7 +168,7 @@ const AcademicQualification = () => {
                                     type='text'
                                     name='otherpostuniversity'
                                     value={otherPostUniversity}
-                                    // required
+                                    
                                     className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     onChange={handleOtherPostUnivesity}
                                 />
@@ -194,7 +178,7 @@ const AcademicQualification = () => {
                             <select
                                 value={selectedPostDegree}
                                 onChange={handlePostDegreeChange}
-                                // required
+                                
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -206,7 +190,7 @@ const AcademicQualification = () => {
                             <select
                                 value={selectedPostBranch}
                                 onChange={handlePostBranchChange}
-                                // required
+                                
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -214,22 +198,19 @@ const AcademicQualification = () => {
                                 <option value="Computer Engineering">Computer Engineering</option>
                             </select>
                         </label>
-                        <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Current/Previous Semester:
+                        <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                            Current/Previous Semester:
                             <select
-                                // required
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                 value={selectedPostSemester}
-                                onChange={handlePostSemesterChange}
+                                onChange={(e) => handleInputChange('selectedPostSemester', e.target.value)}
                             >
-                                <option value="">Select-An-Option</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
+                                <option value=''>Select-An-Option</option>
+                                {[1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
+                                    <option key={value} value={String(value)}>
+                                        {value}
+                                    </option>
+                                ))}
                             </select>
                         </label>
                         {selectedPostSemester === '1' && (
@@ -250,16 +231,18 @@ const AcademicQualification = () => {
                                 </label>
                             </>
                         )}
-                        {selectedPostSemester === '2' && (
+                        {selectedPostSemester >= 2 && selectedPostSemester <= 8 && (
                             <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                                    Percentage/Cpi/Cgpa:
                                     <input
                                         type='text'
                                         placeholder='ex: 1213212'
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     />
                                 </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                                    Max Percentage/Cpi/Cgpa:
                                     <input
                                         type='text'
                                         placeholder='ex: 1213212'
@@ -270,183 +253,15 @@ const AcademicQualification = () => {
                                     <AddSemester
                                         key={index}
                                         {...section}
-                                        onRemove={(e) => handleRemoveSem(e,index)}
+                                        onRemove={(e) => handleRemoveSem(e, index)}
                                     />
                                 ))}
                                 <button
-                                    className="bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]"
+                                    className='bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]'
                                     onClick={handlePostAddSemester}
-                                >Add Semester</button>
-
-                            </>
-                        )}
-                        
-                        {selectedPostSemester === '3' && (
-                            <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                {postAddSemester.map((section, index) => (
-                                    <AddSemester
-                                        key={index}
-                                        {...section}
-                                        onRemove={(e) => handleRemoveSem(e,index)}
-                                    />
-                                ))}
-                                <button
-                                    className="bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]"
-                                >Add Semester</button>
-                            </>
-                        )}
-                        {selectedPostSemester === '4' && (
-                            <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                {postAddSemester.map((section, index) => (
-                                    <AddSemester
-                                        key={index}
-                                        {...section}
-                                        onRemove={(e) => handleRemoveSem(e,index)}
-                                    />
-                                ))}
-                                <button
-                                    className="bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]"
-                                >Add Semester</button>
-                            </>
-                        )}
-                        {selectedPostSemester === '5' && (
-                            <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                {postAddSemester.map((section, index) => (
-                                    <AddSemester
-                                        key={index}
-                                        {...section}
-                                        onRemove={(e) => handleRemoveSem(e,index)}
-                                    />
-                                ))}
-                                <button
-                                    className="bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]"
-                                >Add Semester</button>
-                            </>
-                        )}
-                        {selectedPostSemester === '6' && (
-                            <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                {postAddSemester.map((section, index) => (
-                                    <AddSemester
-                                        key={index}
-                                        {...section}
-                                        onRemove={(e) => handleRemoveSem(e,index)}
-                                    />
-                                ))}
-                                <button
-                                    className="bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]"
-                                >Add Semester</button>
-                            </>
-                        )}
-                        {selectedPostSemester === '7' && (
-                            <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                {postAddSemester.map((section, index) => (
-                                    <AddSemester
-                                        key={index}
-                                        {...section}
-                                        onRemove={(e) => handleRemoveSem(e,index)}
-                                    />
-                                ))}
-                                <button
-                                    className="bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]"
-                                >Add Semester</button>
-                            </>
-                        )}
-                        {selectedPostSemester === '8' && (
-                            <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                {postAddSemester.map((section, index) => (
-                                    <AddSemester
-                                        key={index}
-                                        {...section}
-                                        onRemove={(e) => handleRemoveSem(e,index)}
-                                    />
-                                ))}
-                                <button
-                                    className="bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]"
-                                >Add Semester</button>
+                                >
+                                    Add Semester
+                                </button>
                             </>
                         )}
                         <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Registration No/ Roll No:
@@ -455,7 +270,7 @@ const AcademicQualification = () => {
                                 placeholder='ex: 1234'
                                 value={selectedPostRegistration}
                                 onChange={handlePostRegistrationChange}
-                                // required
+                                
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             />
                         </label>
@@ -464,7 +279,7 @@ const AcademicQualification = () => {
                                 name='qualifyingdegree'
                                 value={selectedPostGraduation}
                                 onChange={handlePostGraduationChange}
-                                // required
+                                
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -478,7 +293,7 @@ const AcademicQualification = () => {
                                         name='underinstitutename'
                                         value={selectedUnderInstitute}
                                         onChange={handleUnderInstituteChange}
-                                        // required
+                                        
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     >
                                         <option value="">Select-An-Option</option>
@@ -497,7 +312,7 @@ const AcademicQualification = () => {
                                             type='text'
                                             name='otherunderuniversity'
                                             value={otherUnderUniversity}
-                                            // required
+                                            
                                             className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                             onChange={handleOtherUnderUnivesity}
                                         />
@@ -507,7 +322,7 @@ const AcademicQualification = () => {
                                     <select
                                         value={selectedUnderDegree}
                                         onChange={handleUnderDegreeChange}
-                                        // required
+                                        
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     >
                                         <option value="">Select-An-Option</option>
@@ -519,7 +334,7 @@ const AcademicQualification = () => {
                                     <select
                                         value={selectedUnderBranch}
                                         onChange={handleUnderBranchChange}
-                                        // required
+                                        
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     >
                                         <option value="">Select-An-Option</option>
@@ -527,13 +342,80 @@ const AcademicQualification = () => {
                                         <option value="Computer Engineering">Computer Engineering</option>
                                     </select>
                                 </label>
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                            Current/Previous Semester:
+                            <select
+                                className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                value={selectedPostSemester}
+                                onChange={(e) => handleInputChange('selectedPostSemester', e.target.value)}
+                            >
+                                <option value=''>Select-An-Option</option>
+                                {[1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
+                                    <option key={value} value={String(value)}>
+                                        {value}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                        {selectedPostSemester === '1' && (
+                            <>
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
+                                    <input
+                                        type='text'
+                                        placeholder='ex: 1213212'
+                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                    />
+                                </label>
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
+                                    <input
+                                        type='text'
+                                        placeholder='ex: 1213212'
+                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                    />
+                                </label>
+                            </>
+                        )}
+                        {selectedPostSemester >= 2 && selectedPostSemester <= 8 && (
+                            <>
+                                {/* ... other form elements */}
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                                    Percentage/Cpi/Cgpa:
+                                    <input
+                                        type='text'
+                                        placeholder='ex: 1213212'
+                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                    />
+                                </label>
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                                    Max Percentage/Cpi/Cgpa:
+                                    <input
+                                        type='text'
+                                        placeholder='ex: 1213212'
+                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                    />
+                                </label>
+                                {postAddSemester.map((section, index) => (
+                                    <AddSemester
+                                        key={index}
+                                        {...section}
+                                        onRemove={(e) => handleRemoveSem(e, index)}
+                                    />
+                                ))}
+                                <button
+                                    className='bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]'
+                                    onClick={handlePostAddSemester}
+                                >
+                                    Add Semester
+                                </button>
+                            </>
+                        )}
                                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Registration No/ Roll No:
                                     <input
                                         type='text'
                                         placeholder='ex: 1234'
                                         value={selectedUnderRegistration}
                                         onChange={handleUnderRegistrationChange}
-                                        // required
+                                        
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     />
                                 </label>
@@ -548,7 +430,7 @@ const AcademicQualification = () => {
                                 name='underinstitutename'
                                 value={selectedUnderInstitute}
                                 onChange={handleUnderInstituteChange}
-                                // required
+                                
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -567,7 +449,7 @@ const AcademicQualification = () => {
                                     type='text'
                                     name='otherunderuniversity'
                                     value={otherUnderUniversity}
-                                    required
+                        
                                     className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     onChange={handleOtherUnderUnivesity}
                                 />
@@ -577,7 +459,7 @@ const AcademicQualification = () => {
                             <select
                                 value={selectedUnderDegree}
                                 onChange={handleUnderDegreeChange}
-                                required
+                    
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -589,7 +471,7 @@ const AcademicQualification = () => {
                             <select
                                 value={selectedUnderBranch}
                                 onChange={handleUnderBranchChange}
-                                required
+                    
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -597,13 +479,80 @@ const AcademicQualification = () => {
                                 <option value="Computer Engineering">Computer Engineering</option>
                             </select>
                         </label>
+                        <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                            Current/Previous Semester:
+                            <select
+                                className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                value={selectedPostSemester}
+                                onChange={(e) => handleInputChange('selectedPostSemester', e.target.value)}
+                            >
+                                <option value=''>Select-An-Option</option>
+                                {[1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
+                                    <option key={value} value={String(value)}>
+                                        {value}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                        {selectedPostSemester === '1' && (
+                            <>
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
+                                    <input
+                                        type='text'
+                                        placeholder='ex: 1213212'
+                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                    />
+                                </label>
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
+                                    <input
+                                        type='text'
+                                        placeholder='ex: 1213212'
+                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                    />
+                                </label>
+                            </>
+                        )}
+                        {selectedPostSemester >= 2 && selectedPostSemester <= 8 && (
+                            <>
+                                {/* ... other form elements */}
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                                    Percentage/Cpi/Cgpa:
+                                    <input
+                                        type='text'
+                                        placeholder='ex: 1213212'
+                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                    />
+                                </label>
+                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
+                                    Max Percentage/Cpi/Cgpa:
+                                    <input
+                                        type='text'
+                                        placeholder='ex: 1213212'
+                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
+                                    />
+                                </label>
+                                {postAddSemester.map((section, index) => (
+                                    <AddSemester
+                                        key={index}
+                                        {...section}
+                                        onRemove={(e) => handleRemoveSem(e, index)}
+                                    />
+                                ))}
+                                <button
+                                    className='bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]'
+                                    onClick={handlePostAddSemester}
+                                >
+                                    Add Semester
+                                </button>
+                            </>
+                        )}
                         <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Registration No/ Roll No:
                             <input
                                 type='text'
                                 placeholder='ex: 1234'
                                 value={selectedUnderRegistration}
                                 onChange={handleUnderRegistrationChange}
-                                required
+                    
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             />
                         </label>

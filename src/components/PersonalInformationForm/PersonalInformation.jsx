@@ -1,43 +1,12 @@
 import React, { useState } from 'react'
 
-const PersonalInformation = () => {
-    const [formData, setFormData] = useState({
-        firstname: '',
-        middlename: '',
-        lastname: '',
-        dob: '',
-        fathersfirstname: '',
-        fathersmiddlename: '',
-        fatherslastname: '',
-        gender: '',
-        email: '',
-        phonenumber: '',
-        altphonenumber: '',
-        photo: null
-    })
-
-    const handleChange = (e) => {
-        const { name, value, type, files } = e.target
-        console.log(e.target)
-
-        if (type === 'file') {
-            setFormData((prevData) => ({
-                ...prevData,
-                [name]: files[0],
-            }));
-        } else {
-            setFormData((prevData) => ({
-                ...prevData,
-                [name]: value,
-            }));
-        }
-    }
+const PersonalInformation = ({formData, handleChange}) => {
 
     return (
         <div >
-            <h1 className='text-base font-medium m-1 md:ml-3'>Personal Information</h1>
-            <hr className='border border-black m-1 md:ml-3 w-11/12' />
-            <form action='' method=''>
+            <h1 className='text-base font-medium'>Personal Information</h1>
+            <hr className='border border-gray-400 mt-1 mb-1 w-11/12 ' />
+            <form action='' method='' className='mt-3'>
                 <label className='text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Full Name:
                     <div className='md:flex'>
                         <input
@@ -108,9 +77,9 @@ const PersonalInformation = () => {
                         onChange={handleChange}
                         className='block border border-black border-solid rounded-md w-11/12 p-1 sm:w-10/12 md:h-7 md:w-1/3 md:text-xs lg:w-1/4'>
                         <option value="">Select-an-Option</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="others">Others</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
                     </select>
                 </label>
                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Email ID:

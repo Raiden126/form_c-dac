@@ -1,37 +1,16 @@
 import React, { useState } from 'react'
 
-const TaskPreference = () => {
-    const [firstPreference, setFirstPreference] = useState('');
-    const [secondPreference, setSecondPreference] = useState('');
-    const [thirdPreference, setThirdPreference] = useState('');
-    const [otherPreference, setOtherPreference] = useState('');
-
-    const handleFirstPreferenceChange = (e) => {
-        setFirstPreference(e.target.value)
-    }
-
-    const handleSecondPreferenceChange = (e) => {
-        setSecondPreference(e.target.value)
-    }
-
-    const handleThirdPreferenceChange = (e) => {
-        setThirdPreference(e.target.value)
-    }
-
-    const handleOtherPreferenceChange = (e) => {
-        setOtherPreference(e.target.value)
-    }
-
+const TaskPreference = ({formData, handleChange}) => {
     return (
         <div>
-            <h1 className='text-base font-medium m-1 md:ml-3 mt-4'>Project/Task Preference</h1>
-            <hr className='border border-black m-1 md:ml-3 w-11/12' />
-            <form action='' method=''>
+            <h1 className='text-base font-medium mt-4'>Project/Task Preference</h1>
+            <hr className='border border-gray-400 mt-1 mb-1 w-11/12 ' />
+            <form action='' method='' className='mt-3'>
                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>First Preference:
                     <select
-                        value={firstPreference}
-                        onChange={handleFirstPreferenceChange}
-                        required
+                        name='firstPreference'
+                        value={formData.firstPreference}
+                        onChange={handleChange}
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>
@@ -53,9 +32,9 @@ const TaskPreference = () => {
                 </label>
                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Second Preference:
                     <select
-                        value={secondPreference}
-                        onChange={handleSecondPreferenceChange}
-                        required
+                        name='secondPreference'
+                        value={formData.secondPreference}
+                        onChange={handleChange}
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>
@@ -77,9 +56,9 @@ const TaskPreference = () => {
                 </label>
                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Third Preference:
                     <select
-                        value={thirdPreference}
-                        onChange={handleThirdPreferenceChange}
-                        required
+                        name='thirdPreference'
+                        value={formData.thirdPreference}
+                        onChange={handleChange}
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>
@@ -102,8 +81,9 @@ const TaskPreference = () => {
                 <label  className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Other:
                     <input 
                     type='text' 
-                    value={otherPreference}
-                    onChange={handleOtherPreferenceChange}
+                    name='otherPreference'
+                    value={formData.otherPreference}
+                    onChange={handleChange}
                     placeholder='Java,Python etc separate with commas'
                     className='border border-black border-solid rounded-md w-11/12 block text-xs p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     />
