@@ -48,13 +48,18 @@ const TermsAndCondition = ({ onSubmit, formData, handleChange }) => {
                 <label className='text-base font-normal mt-0 ml-1 md:ml-3 mb-1 block'>Date:
                     <input
                         type='date'
-                        name='dob'
+                        name='termsDob'
+                        value={formData.termsDob}
+                        onChange={handleChange}
                         className='border border-black border-solid rounded-md w-9/12 h-7 p-1 block cursor-pointer sm:w-10/12 md:h-7 md:w-1/3 md:text-xs lg:w-1/4' />
                 </label>
                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Place:
                     <input
                         type='text'
                         placeholder='Enter your place name'
+                        value={formData.termsPlace}
+                        onChange={handleChange}
+                        name='termsPlace'
                         className='border border-black text-xs sm:text-base border-solid rounded-md w-9/12 h-7 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5' />
                 </label>
                 <h1 className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1 text-[#1A50B9]'>Signature Of Student</h1>
@@ -66,7 +71,6 @@ const TermsAndCondition = ({ onSubmit, formData, handleChange }) => {
                                 accept='application/pdf'
                                 onChange={handleChange}
                                 name='studentTermsAndCondition'
-    
                                 className='m-1 hidden'
                             />
                             choose file

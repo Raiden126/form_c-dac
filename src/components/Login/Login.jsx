@@ -6,7 +6,7 @@ const Login = ({ onSubmit }) => {
   
   return (
     <main className='flex justify-center items-center h-full flex-col'>
-      <div className='h-56 w-60 border-2 border-black border-solid rounded-md shadow-2xl mt-40 mb-5 shadow-slate-400'>
+      <div className='h-56 w-60 border-2 border-solid rounded-md shadow-2xl mt-40 mb-5 shadow-slate-400'>
         <h1 className='text-center mb-3 text-lg font-semibold'> Register <FontAwesomeIcon icon={faLock} /></h1>
         <label className='ml-4 font-normal'>Email ID
           <input type='text'

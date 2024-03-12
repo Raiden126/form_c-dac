@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddSemester from '../AddSemester';
 
-const AcademicQualification = () => {
+const AcademicQualification = ({ onUpdateAcademicQualification }) => {
     const [selectedGraduation, setSelectedGraduation] = useState('');
     const [selectedPostGraduation, setSelectedPostGraduation] = useState('');
 
@@ -11,6 +11,8 @@ const AcademicQualification = () => {
     const [selectedPostBranch, setSelectedPostBranch] = useState('');
     const [selectedPostSemester, setSelectedPostSemester] = useState('');
     const [selectedPostRegistration, setSeclectedPostRegistration] = useState('');
+    const [postGradeType, setPostGradeType] = useState('');
+    const [postGrade, setPostGrade] = useState('');
     const [postAddSemester, setPostAddSemester] = useState([])
 
     const [selectedUnderInstitute, setSelectedUnderInstitute] = useState('');
@@ -18,6 +20,9 @@ const AcademicQualification = () => {
     const [selectedUnderDegree, setSelectedUnderDegree] = useState('');
     const [selectedUnderBranch, setSelectedUnderBranch] = useState('');
     const [selectedUnderRegistration, setSeclectedUnderRegistration] = useState('');
+    const [selectedUnderSemester, setSelectedUnderSemester] = useState('');
+    const [underGradeType, setUnderGradeType] = useState('');
+    const [underGrade, setUnderGrade] = useState('');
 
     const handleGraduationChange = (e) => {
         const selectedGraduationChange = e.target.value;
@@ -64,7 +69,17 @@ const AcademicQualification = () => {
             setSelectedPostDegree(value);
         }
     };
-    
+
+    const handleInputUnderChange = (field, value) => {
+        if (field === 'selectedUnderSemester') {
+            if (value === 'Completed') {
+                setSelectedUnderSemester(value);
+            } else {
+                setSelectedUnderSemester('');
+            }
+        }
+    };
+
 
     const handlePostAddSemester = (e) => {
         e.preventDefault();
@@ -123,6 +138,46 @@ const AcademicQualification = () => {
         setSeclectedUnderRegistration(e.target.value)
     }
 
+    const handlePostGradeType = (e) => {
+        setPostGradeType(e.target.value)
+    }
+
+    const handlePostGrade = (e) => {
+        setPostGrade(e.target.value)
+    }
+
+    const handleUnderGradeType = (e) => {
+        setUnderGradeType(e.target.value)
+    }
+
+    const handleUnderGrade = (e) => {
+        setUnderGrade(e.target.value)
+    }
+
+    useEffect(() => {
+        onUpdateAcademicQualification({
+            selectedGraduation,
+            selectedPostGraduation,
+            selectedPostInstitute,
+            otherPostUniversity,
+            selectedPostDegree,
+            selectedPostBranch,
+            selectedPostSemester,
+            selectedPostRegistration,
+            postAddSemester,
+            selectedUnderInstitute,
+            otherUnderUniversity,
+            selectedUnderDegree,
+            selectedUnderBranch,
+            selectedUnderRegistration,
+            selectedUnderSemester,
+            postGradeType,
+            postGrade,
+            underGradeType,
+            underGrade
+        })
+    }, [selectedGraduation, selectedPostGraduation,selectedUnderSemester, selectedPostInstitute, otherPostUniversity, selectedPostDegree, selectedPostBranch, selectedPostSemester, selectedPostRegistration, postAddSemester, selectedUnderInstitute, otherUnderUniversity, selectedUnderDegree, selectedUnderBranch, selectedUnderRegistration, postGradeType, postGrade, underGrade, underGradeType])
+
 
     return (
         <div>
@@ -134,7 +189,7 @@ const AcademicQualification = () => {
                         name='qualifyingdegree'
                         value={selectedGraduation}
                         onChange={handleGraduationChange}
-                        
+
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>
@@ -149,7 +204,7 @@ const AcademicQualification = () => {
                                 name='postinstitutename'
                                 value={selectedPostInstitute}
                                 onChange={handlePostInstituteChange}
-                                
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -168,7 +223,7 @@ const AcademicQualification = () => {
                                     type='text'
                                     name='otherpostuniversity'
                                     value={otherPostUniversity}
-                                    
+
                                     className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     onChange={handleOtherPostUnivesity}
                                 />
@@ -178,7 +233,7 @@ const AcademicQualification = () => {
                             <select
                                 value={selectedPostDegree}
                                 onChange={handlePostDegreeChange}
-                                
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -190,7 +245,7 @@ const AcademicQualification = () => {
                             <select
                                 value={selectedPostBranch}
                                 onChange={handlePostBranchChange}
-                                
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -199,7 +254,7 @@ const AcademicQualification = () => {
                             </select>
                         </label>
                         <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                            Current/Previous Semester:
+                            Current Semester
                             <select
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                 value={selectedPostSemester}
@@ -215,40 +270,64 @@ const AcademicQualification = () => {
                         </label>
                         {selectedPostSemester === '1' && (
                             <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
+                                <div className='md:flex'>
+                                    <div className='md:basis-1/2'>
+                                        <label className='ml-1 md:ml-3'>Grade Type:
+                                            <select
+                                                value={postGradeType}
+                                                onChange={handlePostGradeType}
+                                                className='border block border-black border-solid rounded-md w-11/12 ml-1 md:ml-3 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                            >
+                                                <option value=''>Select-An-Option</option>
+                                                <option value='Percentage'>Percentage</option>
+                                                <option value='CGPA'>CGPA</option>
+                                                <option value='CPI'>CPI</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div className='md:basis-1/2'>
+                                        <label className='ml-1'>Grade:
+                                            <input
+                                                value={postGrade}
+                                                onChange={handlePostGrade}
+                                                type='text'
+                                                placeholder='ex: 88 or 8.8'
+                                                className='border block border-black border-solid rounded-md w-11/12 ml-1 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
                             </>
                         )}
                         {selectedPostSemester >= 2 && selectedPostSemester <= 8 && (
                             <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                                    Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                                    Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
+                                <div className='md:flex'>
+                                    <div className='md:basis-1/2'>
+                                        <label className='ml-1 md:ml-3'>Grade Type:
+                                            <select
+                                                value={postGradeType}
+                                                onChange={handlePostGradeType}
+                                                className='border block border-black border-solid rounded-md w-11/12 ml-1 md:ml-3 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                            >
+                                                <option value=''>Select-An-Option</option>
+                                                <option value='Percentage'>Percentage</option>
+                                                <option value='CGPA'>CGPA</option>
+                                                <option value='CPI'>CPI</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div className='md:basis-1/2'>
+                                        <label className='ml-1'>Grade:
+                                            <input
+                                                type='text'
+                                                value={postGrade}
+                                                onChange={handlePostGrade}
+                                                placeholder='ex: 88 or 8.8'
+                                                className='border block border-black border-solid rounded-md w-11/12 ml-1 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
                                 {postAddSemester.map((section, index) => (
                                     <AddSemester
                                         key={index}
@@ -270,7 +349,7 @@ const AcademicQualification = () => {
                                 placeholder='ex: 1234'
                                 value={selectedPostRegistration}
                                 onChange={handlePostRegistrationChange}
-                                
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             />
                         </label>
@@ -279,7 +358,7 @@ const AcademicQualification = () => {
                                 name='qualifyingdegree'
                                 value={selectedPostGraduation}
                                 onChange={handlePostGraduationChange}
-                                
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -293,7 +372,7 @@ const AcademicQualification = () => {
                                         name='underinstitutename'
                                         value={selectedUnderInstitute}
                                         onChange={handleUnderInstituteChange}
-                                        
+
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     >
                                         <option value="">Select-An-Option</option>
@@ -312,7 +391,7 @@ const AcademicQualification = () => {
                                             type='text'
                                             name='otherunderuniversity'
                                             value={otherUnderUniversity}
-                                            
+
                                             className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                             onChange={handleOtherUnderUnivesity}
                                         />
@@ -322,7 +401,7 @@ const AcademicQualification = () => {
                                     <select
                                         value={selectedUnderDegree}
                                         onChange={handleUnderDegreeChange}
-                                        
+
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     >
                                         <option value="">Select-An-Option</option>
@@ -334,7 +413,7 @@ const AcademicQualification = () => {
                                     <select
                                         value={selectedUnderBranch}
                                         onChange={handleUnderBranchChange}
-                                        
+
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     >
                                         <option value="">Select-An-Option</option>
@@ -343,79 +422,54 @@ const AcademicQualification = () => {
                                     </select>
                                 </label>
                                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                            Current/Previous Semester:
-                            <select
-                                className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                value={selectedPostSemester}
-                                onChange={(e) => handleInputChange('selectedPostSemester', e.target.value)}
-                            >
-                                <option value=''>Select-An-Option</option>
-                                {[1, 2, 3, 4, 5, 6, 7, 8].map((value) => (
-                                    <option key={value} value={String(value)}>
-                                        {value}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                        {selectedPostSemester === '1' && (
-                            <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
+                                    Final Grade:
+                                    <select
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
+                                        value={selectedUnderSemester}
+                                        onChange={(e) => handleInputUnderChange('selectedUnderSemester', e.target.value)}
+                                    >
+                                        <option value=''>Select-An-Option</option>
+                                        <option value='Completed'>Completed</option>
+                                    </select>
                                 </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                            </>
-                        )}
-                        {selectedPostSemester >= 2 && selectedPostSemester <= 8 && (
-                            <>
-                                {/* ... other form elements */}
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                                    Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                                    Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                {postAddSemester.map((section, index) => (
-                                    <AddSemester
-                                        key={index}
-                                        {...section}
-                                        onRemove={(e) => handleRemoveSem(e, index)}
-                                    />
-                                ))}
-                                <button
-                                    className='bg-[#0052CC] border border-solid border-black m-1 h-7 w-24 text-xs md:ml-3 rounded-md text-white hover:bg-white hover:text-[#0052CC]'
-                                    onClick={handlePostAddSemester}
-                                >
-                                    Add Semester
-                                </button>
-                            </>
-                        )}
+                                {selectedUnderSemester === 'Completed' && (
+                                    <>
+                                        <div className='md:flex'>
+                                            <div className='md:basis-1/2'>
+                                                <label className='ml-1 md:ml-3'>Grade Type:
+                                                    <select
+                                                        value={underGradeType}
+                                                        onChange={handleUnderGradeType}
+                                                        className='border block border-black border-solid rounded-md w-11/12 ml-1 md:ml-3 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                                    >
+                                                        <option value=''>Select-An-Option</option>
+                                                        <option value='Percentage'>Percentage</option>
+                                                        <option value='CGPA'>CGPA</option>
+                                                        <option value='CPI'>CPI</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                            <div className='md:basis-1/2'>
+                                                <label className='ml-1'>Grade:
+                                                    <input
+                                                        value={underGrade}
+                                                        onChange={handleUnderGrade}
+                                                        type='text'
+                                                        placeholder='ex: 88 or 8.8'
+                                                        className='border block border-black border-solid rounded-md w-11/12 ml-1 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                                    />
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Registration No/ Roll No:
                                     <input
                                         type='text'
                                         placeholder='ex: 1234'
                                         value={selectedUnderRegistration}
                                         onChange={handleUnderRegistrationChange}
-                                        
+
                                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     />
                                 </label>
@@ -430,7 +484,7 @@ const AcademicQualification = () => {
                                 name='underinstitutename'
                                 value={selectedUnderInstitute}
                                 onChange={handleUnderInstituteChange}
-                                
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -449,7 +503,7 @@ const AcademicQualification = () => {
                                     type='text'
                                     name='otherunderuniversity'
                                     value={otherUnderUniversity}
-                        
+
                                     className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                     onChange={handleOtherUnderUnivesity}
                                 />
@@ -459,7 +513,7 @@ const AcademicQualification = () => {
                             <select
                                 value={selectedUnderDegree}
                                 onChange={handleUnderDegreeChange}
-                    
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -471,7 +525,7 @@ const AcademicQualification = () => {
                             <select
                                 value={selectedUnderBranch}
                                 onChange={handleUnderBranchChange}
-                    
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>
@@ -480,7 +534,7 @@ const AcademicQualification = () => {
                             </select>
                         </label>
                         <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                            Current/Previous Semester:
+                            Current Semester:
                             <select
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                                 value={selectedPostSemester}
@@ -496,41 +550,64 @@ const AcademicQualification = () => {
                         </label>
                         {selectedPostSemester === '1' && (
                             <>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
+                                <div className='md:flex'>
+                                    <div className='md:basis-1/2'>
+                                        <label className='ml-1 md:ml-3'>Grade Type:
+                                            <select
+                                                value={underGradeType}
+                                                onChange={handleUnderGradeType}
+                                                className='border block border-black border-solid rounded-md w-11/12 ml-1 md:ml-3 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                            >
+                                                <option value=''>Select-An-Option</option>
+                                                <option value='Percentage'>Percentage</option>
+                                                <option value='CGPA'>CGPA</option>
+                                                <option value='CPI'>CPI</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div className='md:basis-1/2'>
+                                        <label className='ml-1'>Grade:
+                                            <input
+                                                value={underGrade}
+                                                onChange={handleUnderGrade}
+                                                type='text'
+                                                placeholder='ex: 88 or 8.8'
+                                                className='border block border-black border-solid rounded-md w-11/12 ml-1 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
                             </>
                         )}
                         {selectedPostSemester >= 2 && selectedPostSemester <= 8 && (
                             <>
-                                {/* ... other form elements */}
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                                    Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
-                                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>
-                                    Max Percentage/Cpi/Cgpa:
-                                    <input
-                                        type='text'
-                                        placeholder='ex: 1213212'
-                                        className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
-                                    />
-                                </label>
+                                <div className='md:flex'>
+                                    <div className='md:basis-1/2'>
+                                        <label className='ml-1 md:ml-3'>Grade Type:
+                                            <select
+                                                value={underGradeType}
+                                                onChange={handleUnderGradeType}
+                                                className='border block border-black border-solid rounded-md w-11/12 ml-1 md:ml-3 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                            >
+                                                <option value=''>Select-An-Option</option>
+                                                <option value='Percentage'>Percentage</option>
+                                                <option value='CGPA'>CGPA</option>
+                                                <option value='CPI'>CPI</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div className='md:basis-1/2'>
+                                        <label className='ml-1'>Grade:
+                                            <input
+                                                type='text'
+                                                value={underGrade}
+                                                onChange={handleUnderGrade}
+                                                placeholder='ex: 88 or 8.8'
+                                                className='border block border-black border-solid rounded-md w-11/12 ml-1 p-1 sm:w-10/12 md:text-xs md:h-7 md:w-[78%]'
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
                                 {postAddSemester.map((section, index) => (
                                     <AddSemester
                                         key={index}
@@ -552,7 +629,7 @@ const AcademicQualification = () => {
                                 placeholder='ex: 1234'
                                 value={selectedUnderRegistration}
                                 onChange={handleUnderRegistrationChange}
-                    
+
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             />
                         </label>
