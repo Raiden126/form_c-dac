@@ -19,7 +19,7 @@ const StudentDeclaration = ({handleChange, formData}) => {
                         <input
                             type='file'
                             name='studentDeclarationSignature'
-                            accept='application/pdf'
+                            accept='image/'
                             onChange={handleChange}
                             className='m-1 md:ml-3 hidden '
                         />

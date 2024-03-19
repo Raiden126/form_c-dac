@@ -25,7 +25,7 @@ const BonafideCertificate = ({formData, handleChange}) => {
                     <div className='md:basis-1/2'>
                         <input
                             type='file'
-                            accept='.pdf'
+                            accept='application/pdf'
                             name='uploadForm'
                             className='hidden'
                             onChange={handleChange}

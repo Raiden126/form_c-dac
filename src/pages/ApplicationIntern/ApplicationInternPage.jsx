@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import PersonalInformation from '../components/PersonalInformationForm/PersonalInformation'
-import AcademicQualification from '../components/AcademicQualificationForm/AcademicQualification'
-import TaskPreference from '../components/TaskPreference/TaskPreference'
-import StudentDeclaration from '../components/StudentDeclaration/StudentDeclaration'
-import BonafideCertificate from '../components/BonafideCertificate/BonafideCertificate'
-import TermsAndCondition from '../components/TermsAndCondition/TermsAndCondition'
+import PersonalInformation from '../../components/PersonalInformationForm/PersonalInformation'
+import AcademicQualification from '../../components/AcademicQualificationForm/AcademicQualification'
+import TaskPreference from '../../components/TaskPreference/TaskPreference'
+import StudentDeclaration from '../../components/StudentDeclaration/StudentDeclaration'
+import BonafideCertificate from '../../components/BonafideCertificate/BonafideCertificate'
+import TermsAndCondition from '../../components/TermsAndCondition/TermsAndCondition'
 import axios from 'axios'
 
 const ApplicationInternPage = () => {
@@ -37,10 +37,10 @@ const ApplicationInternPage = () => {
         termsPlace: ''
     })
 
-    const continueButton = () => {
+    const continueButton = async (e) => {
+        e.preventDefault();
         alert("Your Form Have Been Submitted Successfully");
     
-        // Mapping frontend field names to backend field names
         const mappedFormData = {
             first_name: formData.firstname,
             middle_name: formData.middlename,
@@ -49,12 +49,17 @@ const ApplicationInternPage = () => {
             father_name: formData.fathersfirstname,
             // fathers_middle_name: formData.fathersmiddlename,
             // fathers_last_name: formData.fatherslastname,
-            mother_name: formData.fathersmiddlename,
+            mother_name: formData.fatherslastname,
             gender: formData.gender,
-            email: formData.email,
+            email_id: formData.email,
             mobile_number: formData.phonenumber,
             document: formData.photo,
-            documentsignature: formData.studentDeclarationSignature
+            city: formData.city,
+            district: formData.district,
+            state: formData.state,
+            pincode: formData.pincode,
+            documentsignature: formData.studentDeclarationSignature,
+            documentbonafide: formData.uploadForm
         };
     
         const backendUrl = 'http://10.248.1.56:8080/users/validate';
@@ -63,16 +68,20 @@ const ApplicationInternPage = () => {
         for (const key in mappedFormData) {
             formDataToSend.append(key, mappedFormData[key]);
         }
-    
-        axios.post(backendUrl, formDataToSend)
+
+        await axios.post(backendUrl, formDataToSend, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
             .then(res => {
                 console.log('axios response:', res);
             })
             .catch(err => {
                 console.error('axios error:', err);
             });
-    
-        location.reload();
+
+        // location.reload();
     };
     
     // useEffect(() => {
