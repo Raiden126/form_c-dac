@@ -25,7 +25,7 @@ const StudentDeclaration = ({handleChange, formData}) => {
                         />
                         choose file
                     </label>
-                    <p className='text-xs ml-1 md:ml-3 mb-1 md:mr-10'>(Supported Format: pdf)</p>
+                    <p className='text-xs ml-1 md:ml-3 mb-1 md:mr-10'>(Supported Format: jpg/jpeg/png)</p>
                     {formData.studentDeclarationSignature && (
                         <h1 className='ml-1 md:ml-3 mb-1 md:mr-10 text-sm'>
                             File uploaded: {formData.studentDeclarationSignature.name}

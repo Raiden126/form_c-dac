@@ -46,20 +46,32 @@ const ApplicationInternPage = () => {
             last_name: formData.lastname,
             date_of_birth: formData.dob,
             father_name: formData.fatherfullname,
-            // fathers_middle_name: formData.fathersmiddlename,
-            // fathers_last_name: formData.fatherslastname,
-            mother_name: formData.fatherslastname,
             gender: formData.gender,
             email_id: formData.email,
             mobile_number: formData.phonenumber,
+            alternate_mobile_number: formData.altphonenumber,
             document: formData.photo,
             city: formData.city,
             district: formData.district,
             state: formData.state,
             pincode: formData.pincode,
+            type_of_exam: academicQualificationData.selectedGraduation,
+            institute_name: (academicQualificationData.selectedPostInstitute || academicQualificationData.selectedUnderInstitute !== 'other') ? (  academicQualificationData.selectedUnderInstitute || academicQualificationData.selectedPostInstitute) : (academicQualificationData.otherPostUniversity || academicQualificationData.otherUnderUniversity),
+            qualifying_degree: academicQualificationData.selectedPostDegree || academicQualificationData.selectedUnderDegree,
+            branch: academicQualificationData.selectedPostBranch || academicQualificationData.selectedUnderBranch,
+            current_semister: academicQualificationData.selectedPostSemester || academicQualificationData.selectedUnderSemester,
+            grade_type: academicQualificationData.underGradeType || academicQualificationData.postGradeType,
+            percentage_or_cpi_or_cgpa : academicQualificationData.underGrade || academicQualificationData.postGrade,
+            maximum_percentage_or_cpi_or_cgpa: academicQualificationData.underGrade || academicQualificationData.postGrade,
+            first_preference: formData.firstPreference,
+            second_preference: formData.secondPreference,
+            third_preference: formData.thirdPreference,
+            other_preference: formData.otherPreference,
+            registration_number : academicQualificationData.selectedPostRegistration || academicQualificationData.selectedUnderRegistration,
             documentsignature: formData.studentDeclarationSignature,
             documentbonafide: formData.uploadForm,
-            termsAndConditionAccepted: formData.termsAndConditionAccepted
+            termsAndConditionAccepted: formData.termsAndConditionAccepted,
+            created_date: formData.termsDob
         };
     
         const backendUrl = 'http://10.248.1.56:8080/users/validate';
@@ -125,6 +137,10 @@ const ApplicationInternPage = () => {
         }
     }
 
+    // const handleTerms = (e) => {
+    //     setFormData(e.target.value)
+    // }
+
     const closeButton = (e) => {
         e.preventDefault();
         setShowPreview(false)
@@ -142,7 +158,7 @@ const ApplicationInternPage = () => {
                 <TaskPreference formData={formData} handleChange={handleChange} />
                 <StudentDeclaration formData={formData} handleChange={handleChange} />
                 <BonafideCertificate formData={formData} handleChange={handleChange} />
-                <TermsAndCondition onSubmit={handleSubmit} formData={formData} handleChange={handleChange} />
+                <TermsAndCondition onSubmit={handleSubmit} formData={formData} handleChange={handleChange}/>
             </div>
             {showPreview && (
                 <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-900 bg-opacity-50">

@@ -7,10 +7,6 @@ const TermsAndCondition = ({ onSubmit, formData, handleChange }) => {
         onSubmit();
     }
 
-    const handleChecked = (e) => {
-        formData.termsAndConditionAccepted(e.target.value)
-    }
-
     return (
         <div>
             <h1 className='text-base font-medium mt-4'>Terms & Condition</h1>
@@ -43,15 +39,14 @@ const TermsAndCondition = ({ onSubmit, formData, handleChange }) => {
                         to the values and work ethics of the organization.
                     </li>
                 </ol>
-                <label className='text-xs m-1 md:ml-3 block md:text-base' htmlFor={formData.termsAndConditionAccepted}>
+                <label className='text-xs m-1 md:ml-3 block md:text-base' >
                     <input
                         type='checkbox'
                         className='m-1 md:ml-3'
                         name='termsAndConditionAccepted'
                         id='termsAndConditionAccepted'
-                        // value={formData.termsAndConditionAccepted}
-                        checked = {formData.termsAndConditionAccepted}
-                        onChange={handleChecked}
+                        // checked = {formData.termsAndConditionAccepted}
+                        // onChange={handleTerms}
                     />I Agree To The Above Terms and Condition
                 </label>
                 <label className='text-base font-normal mt-0 ml-1 md:ml-3 mb-1 block'>Date:
@@ -77,14 +72,14 @@ const TermsAndCondition = ({ onSubmit, formData, handleChange }) => {
                         <label className='inline-block rounded-md border border-black border-solid m-1 h-7 w-24 bg-[#1A50B9] text-white text-center mr-10 hover:bg-white hover:text-black'>
                             <input
                                 type='file'
-                                accept='application/pdf'
+                                accept='/image'
                                 onChange={handleChange}
                                 name='studentTermsAndCondition'
                                 className='m-1 hidden'
                             />
                             choose file
                         </label>
-                        <p className='text-xs ml-1 mb-1'>(Supported Format: pdf)</p>
+                        <p className='text-xs ml-1 mb-1'>(Supported Format: jpg/jpeg/png)</p>
                         {formData.studentTermsAndCondition && (
                             <h1 className='ml-1 mb-1 md:mr-10 text-sm'>
                                 File uploaded: {formData.studentTermsAndCondition.name}
