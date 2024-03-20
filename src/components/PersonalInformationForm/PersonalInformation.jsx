@@ -43,31 +43,16 @@ const PersonalInformation = ({ formData, handleChange }) => {
                         onChange={handleChange}
                         className='border border-black border-solid rounded-md w-11/12 p-1 block cursor-pointer sm:w-10/12 md:h-7 md:w-1/3 md:text-xs lg:w-1/4' />
                 </label>
-                <label className='text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Father's Name:
+                <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Father's Name:
                     <div className='md:flex'>
                         <input
                             type='text'
-                            placeholder='Enter First Name'
+                            placeholder='Enter Full Name'
                             required
-                            name='fathersfirstname'
-                            value={formData.fathersfirstname}
+                            name='fatherfullname'
+                            value={formData.fatherfullname}
                             onChange={handleChange}
-                            className='border border-black border-solid rounded-md w-11/12 m-1 md:ml-3 p-1 sm:w-10/12 md:h-7 md:w-1/3 md:text-xs' />
-                        <input
-                            type='text'
-                            placeholder='Enter Middle Name'
-                            name='fathersmiddlename'
-                            value={formData.fathersmiddlename}
-                            onChange={handleChange}
-                            className='border border-black border-solid rounded-md w-11/12 m-1 md:ml-3 p-1 sm:w-10/12 md:h-7 md:w-1/3 md:text-xs' />
-                        <input
-                            type='text'
-                            placeholder='Enter Last Name'
-                            required
-                            name='fatherslastname'
-                            value={formData.fatherslastname}
-                            onChange={handleChange}
-                            className='border border-black border-solid rounded-md w-11/12 m-1 md:ml-3 p-1 sm:w-10/12 md:h-7 md:w-1/3 md:text-xs' />
+                            className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5' />
                     </div>
                 </label>
                 <label className='block text-base font-normal mt-0 ml-1 md:ml-3 mb-1'>Gender:

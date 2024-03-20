@@ -7,6 +7,10 @@ const TermsAndCondition = ({ onSubmit, formData, handleChange }) => {
         onSubmit();
     }
 
+    const handleChecked = (e) => {
+        formData.termsAndConditionAccepted(e.target.value)
+    }
+
     return (
         <div>
             <h1 className='text-base font-medium mt-4'>Terms & Condition</h1>
@@ -39,10 +43,15 @@ const TermsAndCondition = ({ onSubmit, formData, handleChange }) => {
                         to the values and work ethics of the organization.
                     </li>
                 </ol>
-                <label className='text-xs m-1 md:ml-3 block md:text-base'>
+                <label className='text-xs m-1 md:ml-3 block md:text-base' htmlFor={formData.termsAndConditionAccepted}>
                     <input
                         type='checkbox'
                         className='m-1 md:ml-3'
+                        name='termsAndConditionAccepted'
+                        id='termsAndConditionAccepted'
+                        // value={formData.termsAndConditionAccepted}
+                        checked = {formData.termsAndConditionAccepted}
+                        onChange={handleChecked}
                     />I Agree To The Above Terms and Condition
                 </label>
                 <label className='text-base font-normal mt-0 ml-1 md:ml-3 mb-1 block'>Date:

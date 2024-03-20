@@ -14,9 +14,7 @@ const ApplicationInternPage = () => {
         middlename: '',
         lastname: '',
         dob: '',
-        fathersfirstname: '',
-        fathersmiddlename: '',
-        fatherslastname: '',
+        fatherfullname: '',
         gender: '',
         email: '',
         phonenumber: '',
@@ -34,7 +32,8 @@ const ApplicationInternPage = () => {
         uploadForm: null,
         studentTermsAndCondition: null,
         termsDob: '',
-        termsPlace: ''
+        termsPlace: '',
+        termsAndConditionAccepted: false
     })
 
     const continueButton = async (e) => {
@@ -46,7 +45,7 @@ const ApplicationInternPage = () => {
             middle_name: formData.middlename,
             last_name: formData.lastname,
             date_of_birth: formData.dob,
-            father_name: formData.fathersfirstname,
+            father_name: formData.fatherfullname,
             // fathers_middle_name: formData.fathersmiddlename,
             // fathers_last_name: formData.fatherslastname,
             mother_name: formData.fatherslastname,
@@ -59,7 +58,8 @@ const ApplicationInternPage = () => {
             state: formData.state,
             pincode: formData.pincode,
             documentsignature: formData.studentDeclarationSignature,
-            documentbonafide: formData.uploadForm
+            documentbonafide: formData.uploadForm,
+            termsAndConditionAccepted: formData.termsAndConditionAccepted
         };
     
         const backendUrl = 'http://10.248.1.56:8080/users/validate';
@@ -173,7 +173,7 @@ const ApplicationInternPage = () => {
                                 <label className={`text-base ${windowWidth < 450 && 'text-xs'} md:text-lg font-medium md:font-semibold mt-0 ml-4 md:ml-6 mb-[0.10rem] sm:flex`}>Father's Full Name:</label>
                             </div>
                             <div className='basis-3/5'>
-                                <p className={`text-base ${windowWidth < 450 && 'text-xs mt-[0.33rem]'} md:text-lg font-medium md:font-normal ml-10 sm:ml-6`}>{formData.fathersfirstname} {formData.fathersmiddlename} {formData.fatherslastname}</p>
+                                <p className={`text-base ${windowWidth < 450 && 'text-xs mt-[0.33rem]'} md:text-lg font-medium md:font-normal ml-10 sm:ml-6`}>{formData.fatherfullname}</p>
                             </div>
                         </div>
                         <div className='flex'>
