@@ -72,7 +72,7 @@ const TermsAndCondition = ({ onSubmit, formData, handleChange }) => {
                         <label className='inline-block rounded-md border border-black border-solid m-1 h-7 w-24 bg-[#1A50B9] text-white text-center mr-10 hover:bg-white hover:text-black'>
                             <input
                                 type='file'
-                                accept='/image'
+                                accept='image/'
                                 onChange={handleChange}
                                 name='studentTermsAndCondition'
                                 className='m-1 hidden'
