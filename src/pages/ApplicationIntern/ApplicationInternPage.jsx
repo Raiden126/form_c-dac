@@ -35,6 +35,7 @@ const ApplicationInternPage = () => {
         termsPlace: '',
         termsAndConditionAccepted: false
     })
+    const [error, setError] = useState('')
 
     const continueButton = async (e) => {
         e.preventDefault();
@@ -88,19 +89,13 @@ const ApplicationInternPage = () => {
           })
             .then(res => {
                 console.log('axios response:', res);
+                location.reload();
             })
             .catch(err => {
                 console.error('axios error:', err);
+                setError('There Is An Error, Please Check That Everything Is Correct On Your Form')
             });
-
-        // location.reload();
     };
-    
-    // useEffect(() => {
-    //     console.log('effect')
-        
-
-    // }, [])
 
     const [academicQualificationData, setAcademicQualificationData] = useState({});
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -136,10 +131,6 @@ const ApplicationInternPage = () => {
             }));
         }
     }
-
-    // const handleTerms = (e) => {
-    //     setFormData(e.target.value)
-    // }
 
     const closeButton = (e) => {
         e.preventDefault();
@@ -520,10 +511,11 @@ const ApplicationInternPage = () => {
                             </div>
                         </div>
                         <div className='flex justify-center items-center'>
-                            <button className='text-base md:text-lg mb-5 mt-3 font-medium md:font-semibold ml-3 md:ml-3 border border-solid border-black h-8 w-20 rounded-md bg-blue-800 text-white hover:bg-blue-600 text-center' onClick={closeButton}>Edit</button>
-                            <button className='text-base md:text-lg mb-5 mt-3 font-medium md:font-semibold ml-3 md:ml-3 border border-solid border-black h-8 w-20 rounded-md bg-blue-800 text-white hover:bg-blue-600 text-center' onClick={continueButton}>Continue</button>
+                            <button className='text-base md:text-lg mb-2 mt-3 font-medium md:font-semibold ml-3 md:ml-3 border border-solid border-black h-8 w-20 rounded-md bg-blue-800 text-white hover:bg-blue-600 text-center' onClick={closeButton}>Edit</button>
+                            <button className='text-base md:text-lg mb-2 mt-3 font-medium md:font-semibold ml-3 md:ml-3 border border-solid border-black h-8 w-20 rounded-md bg-blue-800 text-white hover:bg-blue-600 text-center' onClick={continueButton}>Continue</button>
+                            
                         </div>
-
+                        <p className={`text-base ${windowWidth < 450 && 'text-xs'} text-red-700 md:text-lg font-medium md:font-semibold mt-0 ml-4 md:ml-6 mb-3 sm:flex`}>{error}</p>
                     </div>
                 </div>
             )}

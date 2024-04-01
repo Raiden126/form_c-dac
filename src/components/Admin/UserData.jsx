@@ -11,7 +11,7 @@ const UserData = () => {
                 setUserData(response.data);
             })
             .catch((error) => {
-                console.error('Error fetcitem.user && hing user data:', error);
+                console.error('Error fetching user:', error);
             });
     }, []);
 
@@ -166,7 +166,7 @@ const UserData = () => {
                                 {item.skills && item.skills.other_preference}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                {item.user && item.user.created_date}
+                                {item.user && item.formattedCreatedDate}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 <a className='underline' href={`http://10.248.1.56:8080/uploads/${item.user.image_url}`}>Applicant's Passport Photo</a>

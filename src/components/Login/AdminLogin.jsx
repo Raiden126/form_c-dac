@@ -11,7 +11,7 @@ const Login = ({ onSubmit }) => {
 
     const handleLogin = () => {
 
-        if (username === 'Guddu Shakar Paul' && bcrypt.compareSync(password, hashedPassword)) {
+        if (username === 'Alok Dey' && bcrypt.compareSync(password, hashedPassword)) {
             console.log('Password is correct');
             onSubmit();
         } else {
@@ -29,6 +29,7 @@ const Login = ({ onSubmit }) => {
                         placeholder='Enter Your Username'
                         className='h-7 w-3/4 block ml-4 border border-solid border-black rounded-md p-1 mt-1 mb-1'
                         value={username}
+                        autoComplete="off"
                         onChange={(e) => {setUsername(e.target.value)}}
                     />
                 </label>
@@ -38,6 +39,7 @@ const Login = ({ onSubmit }) => {
                         placeholder='Enter Your Password'
                         className='h-7 w-3/4 block ml-4 border border-solid border-black rounded-md p-1 mt-1 mb-1'
                         value={password}
+                        autoComplete="off"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </label>
