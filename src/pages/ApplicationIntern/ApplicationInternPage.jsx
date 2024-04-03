@@ -75,7 +75,7 @@ const ApplicationInternPage = () => {
             created_date: formData.termsDob
         };
     
-        const backendUrl = 'http://10.248.1.56:8080/users/validate';
+        const backendUrl = 'http://10.248.1.56:8081/users/validate';
     
         const formDataToSend = new FormData();
         for (const key in mappedFormData) {
@@ -154,10 +154,10 @@ const ApplicationInternPage = () => {
             {showPreview && (
                 <div className="fixed inset-0 flex justify-center items-center z-50 bg-gray-900 bg-opacity-50">
                     <div className='w-11/12 md:w-4/6 text-black bg-white bg-opacity-95 border-2 h-4/5 border-solid rounded-lg shadow-red-950 shadow-2xl overflow-auto'>
-                        <div className='fixed top-7 left-0 right-0 shadow-sm mt-1 flex justify-center items-center h-16'>
+                        <div className='top-2 left-0 right-0 shadow-sm mt-1 flex justify-center items-center h-16'>
                             <h1 className='text-2xl text-blue-600 font-semibold'>Preview</h1>
                         </div>
-                        <h1 className='mt-12 text-xl text-blue-600 font-medium ml-3 mb-1 md:ml-3'>Personal Information</h1>
+                        <h1 className='mt-2 text-xl text-blue-600 font-medium ml-3 mb-1 md:ml-3'>Personal Information</h1>
                         <hr className='border border-black ml-3 mt-1 mb-3 md:ml-3 w-11/12' />
                         <div className='flex'>
                             <div className='basis-2/5'>
@@ -474,7 +474,7 @@ const ApplicationInternPage = () => {
                                 <p className={`text-base ${windowWidth < 450 && 'text-xs mt-[0.33rem]'} md:text-lg font-medium md:font-normal ml-10 sm:ml-6`}>{formData.studentDeclarationSignature ? formData.studentDeclarationSignature.name : 'Please Upload Your Signature'}</p>
                             </div>
                         </div>
-                        <h1 className='mt-6 text-xl text-blue-600 font-medium ml-3 mb-1 md:ml-3'>Bonafide Certificate</h1>
+                        <h1 className='mt-6 text-xl text-blue-600 font-medium ml-3 mb-1 md:ml-3'>N.O.C Certificate</h1>
                         <hr className='border border-black ml-3 mt-1 mb-3 md:ml-3 w-11/12' />
                         <div className='flex'>
                             <div className='basis-2/5'>

@@ -5,7 +5,7 @@ const UserData = () => {
     const [userData, setUserData] = useState([]);
 
     useEffect(() => {
-        axios.get('http://10.248.1.56:8080/users/usersWithQualificationsAndSkills')
+        axios.get('http://10.248.1.56:8081/users/usersWithQualificationsAndSkills')
             .then((response) => {
                 console.log(response.data);
                 setUserData(response.data);
@@ -169,13 +169,13 @@ const UserData = () => {
                                 {item.user && item.formattedCreatedDate}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <a className='underline' href={`http://10.248.1.56:8080/uploads/${item.user.image_url}`}>Applicant's Passport Photo</a>
+                                <a className='underline' href={`http://10.248.1.56:8081/uploads/${item.user.image_url}`}>Applicant's Passport Photo</a>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <a className='underline' href={`http://10.248.1.56:8080/uploads/${item.user.signature_url}`}>Applicant's Signature</a>
+                                <a className='underline' href={`http://10.248.1.56:8081/uploads/${item.user.signature_url}`}>Applicant's Signature</a>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <a className='underline' href={`http://10.248.1.56:8080/uploads/${item.user.bonafide_url}`}>Bonafide Pdf</a>
+                                <a className='underline' href={`http://10.248.1.56:8081/uploads/${item.user.bonafide_url}`}>NOC Pdf</a>
                             </td>
                         </tr>
                     ))}
