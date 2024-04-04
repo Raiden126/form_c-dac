@@ -189,7 +189,7 @@ const AcademicQualification = ({ onUpdateAcademicQualification }) => {
                         name='qualifyingdegree'
                         value={selectedGraduation}
                         onChange={handleGraduationChange}
-
+                        required
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>
@@ -349,7 +349,6 @@ const AcademicQualification = ({ onUpdateAcademicQualification }) => {
                                 placeholder='ex: 1234'
                                 value={selectedPostRegistration}
                                 onChange={handlePostRegistrationChange}
-
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             />
                         </label>
@@ -358,7 +357,6 @@ const AcademicQualification = ({ onUpdateAcademicQualification }) => {
                                 name='qualifyingdegree'
                                 value={selectedPostGraduation}
                                 onChange={handlePostGraduationChange}
-
                                 className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                             >
                                 <option value="">Select-An-Option</option>

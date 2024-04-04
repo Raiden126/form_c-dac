@@ -12,7 +12,6 @@ const AdminPage = () => {
   };
   return (
     <div>
-        <Header />
         {!isLoggedIn ? (
           <AdminLogin onSubmit={handleSubmit} />
         ) : (<UserData />)

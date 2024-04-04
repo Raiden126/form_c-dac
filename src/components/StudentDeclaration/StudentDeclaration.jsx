@@ -22,6 +22,7 @@ const StudentDeclaration = ({handleChange, formData}) => {
                             accept='image/'
                             onChange={handleChange}
                             className='m-1 md:ml-3 hidden '
+                            required
                         />
                         choose file
                     </label>

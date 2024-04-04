@@ -19,7 +19,6 @@ const ApplicationWithLoginPage = () => {
   };
   return (
     <>
-      <Header />
       <div>
         {!isLoggedIn && !isRegister ? (
           <Login onSubmit={handleSubmit} />

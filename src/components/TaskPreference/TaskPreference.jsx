@@ -11,6 +11,7 @@ const TaskPreference = ({formData, handleChange}) => {
                         name='firstPreference'
                         value={formData.firstPreference}
                         onChange={handleChange}
+                        required
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>
@@ -35,6 +36,7 @@ const TaskPreference = ({formData, handleChange}) => {
                         name='secondPreference'
                         value={formData.secondPreference}
                         onChange={handleChange}
+                        required
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>
@@ -59,6 +61,7 @@ const TaskPreference = ({formData, handleChange}) => {
                         name='thirdPreference'
                         value={formData.thirdPreference}
                         onChange={handleChange}
+                        required
                         className='border border-black border-solid rounded-md w-11/12 block p-1 sm:w-10/12 md:h-7 md:w-2/5 md:text-xs lg:w-2/5'
                     >
                         <option value="">Select-An-Option</option>

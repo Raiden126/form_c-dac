@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const UserData = () => {
     const [userData, setUserData] = useState([]);
+    const [searchSkillsQuery, setSearchSkillsQuery] = useState('');
+    const [searchCityQuery, setSearchCityQuery] = useState('');
 
     useEffect(() => {
         axios.get('http://10.248.1.56:8081/users/usersWithQualificationsAndSkills')
@@ -15,10 +17,52 @@ const UserData = () => {
             });
     }, []);
 
+    const handleSearchSkillsChange = (e) => {
+        setSearchSkillsQuery(e.target.value.toLowerCase());
+    };
+
+    const handleSearchCityChange = (e) => {
+        setSearchCityQuery(e.target.value.toLowerCase());
+    }
+
+    const filteredData = userData.filter((item) => {
+        return (
+            item.skills && (
+                searchSkillsQuery.split(',').every(query => {
+                    return (
+                        item.skills.first_preference.toLowerCase().includes(query.trim()) || 
+                        item.skills.second_preference.toLowerCase().includes(query.trim()) || 
+                        item.skills.third_preference.toLowerCase().includes(query.trim()) || 
+                        (item.skills.other_preference && item.skills.other_preference.toLowerCase().includes(query.trim()))
+                    ) && (
+                        item.user && item.user.city.toLowerCase().includes(searchCityQuery)
+                    );
+                })
+            )
+        );
+    });
+    
+
     return (
         <div className="overflow-x-auto">
             <h1 className='uppercase my-2 ml-2 text-base font-bold text-gray-700 text-center'>Applicant's Details</h1>
-            <h1 className='uppercase my-2 ml-2 text-sm font-bold text-gray-700'>Total Number Of Applicant's:- {userData.length}</h1>
+            <div className='flex justify-center items-center'>
+            <input
+                type="text"
+                placeholder="Search by skills..."
+                value={searchSkillsQuery}
+                onChange={handleSearchSkillsChange}
+                className="px-3 py-2 border mr-2 border-gray-500 rounded-md focus:outline-none focus:border-gray-700"
+            />
+            <input
+                type="text"
+                placeholder="Search by city..."
+                value={searchCityQuery}
+                onChange={handleSearchCityChange}
+                className="px-3 py-2 border mr-2 border-gray-500 rounded-md focus:outline-none focus:border-gray-700"
+            />
+            </div>
+            <h1 className='uppercase my-2 ml-2 text-sm font-bold text-gray-700'>Total Number Of Applicant's:- {filteredData.length}</h1>
             <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                     <tr>
@@ -100,7 +144,7 @@ const UserData = () => {
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {userData.map((item, index) => (
+                    {filteredData.map((item, index) => (
                         <tr key={index}>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                                 {item.user && item.user.first_name} {item.user && item.user.middle_name ? item.user.middle_name : null} {item.user && item.user.last_name}
