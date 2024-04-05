@@ -42,7 +42,6 @@ const UserData = () => {
         );
     });
     
-
     return (
         <div className="overflow-x-auto">
             <h1 className='uppercase my-2 ml-2 text-base font-bold text-gray-700 text-center'>Applicant's Details</h1>
