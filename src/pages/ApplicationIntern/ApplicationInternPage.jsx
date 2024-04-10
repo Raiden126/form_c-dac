@@ -75,7 +75,7 @@ const ApplicationInternPage = () => {
             created_date: formData.termsDob
         };
     
-        const backendUrl = 'http://10.248.1.56:8081/users/validate';
+        const backendUrl = 'http://192.168.60.24:8081/users/validate';
     
         const formDataToSend = new FormData();
         for (const key in mappedFormData) {
@@ -478,7 +478,7 @@ const ApplicationInternPage = () => {
                         <hr className='border border-black ml-3 mt-1 mb-3 md:ml-3 w-11/12' />
                         <div className='flex'>
                             <div className='basis-2/5'>
-                                <label className={`text-base ${windowWidth < 450 && 'text-xs'} md:text-lg font-medium md:font-semibold mt-0 ml-4 md:ml-6 mb-[0.10rem] sm:flex`}>Bonafide Certificate:</label>
+                                <label className={`text-base ${windowWidth < 450 && 'text-xs'} md:text-lg font-medium md:font-semibold mt-0 ml-4 md:ml-6 mb-[0.10rem] sm:flex`}>N.O.C Certificate:</label>
                             </div>
                             <div className='basis-3/5'>
                                 <p className={`text-base ${windowWidth < 450 && 'text-xs mt-[0.33rem]'} md:text-lg font-medium md:font-normal ml-10 sm:ml-6`}>{formData.uploadForm ? formData.uploadForm.name : 'Please Upload Your Bonafide Certificate'}</p>

@@ -7,8 +7,9 @@ const UserData = () => {
     const [searchCityQuery, setSearchCityQuery] = useState('');
 
     useEffect(() => {
-        axios.get('http://10.248.1.56:8081/users/usersWithQualificationsAndSkills')
-            .then((response) => {
+        // axios.get('http://10.248.1.56:8081/users/usersWithQualificationsAndSkills')
+        axios.get('http://192.168.60.24:8081/users/usersWithQualificationsAndSkills')
+        .then((response) => {
                 console.log(response.data);
                 setUserData(response.data);
             })
@@ -41,6 +42,8 @@ const UserData = () => {
             )
         );
     });
+
+    console.log(filteredData)
     
     return (
         <div className="overflow-x-auto">
@@ -138,7 +141,7 @@ const UserData = () => {
                             Student Signature
                         </th>
                         <th scope="col" className="px-6 py-3 text-left text-sm font-bold text-gray-600 uppercase tracking-wider">
-                            Bonafide Signed Certificate
+                            N.O.C Signed Certificate
                         </th>
                     </tr>
                 </thead>
