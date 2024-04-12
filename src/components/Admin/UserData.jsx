@@ -7,7 +7,6 @@ const UserData = () => {
     const [searchCityQuery, setSearchCityQuery] = useState('');
 
     useEffect(() => {
-        // axios.get('http://10.248.1.56:8081/users/usersWithQualificationsAndSkills')
         axios.get('http://192.168.60.24:8081/users/usersWithQualificationsAndSkills')
         .then((response) => {
                 console.log(response.data);
