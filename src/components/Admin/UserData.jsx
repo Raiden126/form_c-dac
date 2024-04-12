@@ -214,13 +214,13 @@ const UserData = () => {
                                 {item.user && item.formattedCreatedDate}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <a className='underline' href={`http://10.248.1.56:8081/uploads/${item.user.image_url}`}>Applicant's Passport Photo</a>
+                                <a className='underline' href={`http://192.168.60.24:8081/uploads/${item.user.image_url}`}>Applicant's Passport Photo</a>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <a className='underline' href={`http://10.248.1.56:8081/uploads/${item.user.signature_url}`}>Applicant's Signature</a>
+                                <a className='underline' href={`http://192.168.60.24:8081/uploads/${item.user.signature_url}`}>Applicant's Signature</a>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                <a className='underline' href={`http://10.248.1.56:8081/uploads/${item.user.bonafide_url}`}>NOC Pdf</a>
+                                <a className='underline' href={`http://192.168.60.24:8081/uploads/${item.user.bonafide_url}`}>NOC Pdf</a>
                             </td>
                         </tr>
                     ))}
