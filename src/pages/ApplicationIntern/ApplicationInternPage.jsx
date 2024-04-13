@@ -39,7 +39,7 @@ const ApplicationInternPage = () => {
 
     const continueButton = async (e) => {
         e.preventDefault();
-        alert("Your Form Have Been Submitted Successfully");
+        alert("Are you sure you want to submit the form?");
     
         const mappedFormData = {
             first_name: formData.firstname,
@@ -89,11 +89,12 @@ const ApplicationInternPage = () => {
           })
             .then(res => {
                 console.log('axios response:', res);
+                alert('Your Form Have Been Submitted Successfully')
                 location.reload();
             })
             .catch(err => {
                 console.error('axios error:', err);
-                setError('There Is An Error, Please Check That Everything Is Correct On Your Form')
+                alert('There Is An Error, Please Check That Everything Is Correct On Your Form')
             });
     };
 
