@@ -39,8 +39,7 @@ const ApplicationInternPage = () => {
 
     const continueButton = async (e) => {
         e.preventDefault();
-        alert("Are you sure you want to submit the form?");
-    
+        
         const mappedFormData = {
             first_name: formData.firstname,
             middle_name: formData.middlename,
@@ -76,26 +75,31 @@ const ApplicationInternPage = () => {
         };
     
         const backendUrl = 'http://192.168.60.24:8081/users/validate';
-    
-        const formDataToSend = new FormData();
-        for (const key in mappedFormData) {
-            formDataToSend.append(key, mappedFormData[key]);
-        }
 
-        await axios.post(backendUrl, formDataToSend, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
+        if(confirm("Are you sure you want to submit the form?")){
+            const formDataToSend = new FormData();
+            for (const key in mappedFormData) {
+                formDataToSend.append(key, mappedFormData[key]);
             }
-          })
-            .then(res => {
-                console.log('axios response:', res);
-                alert('Your Form Have Been Submitted Successfully')
-                location.reload();
-            })
-            .catch(err => {
-                console.error('axios error:', err);
-                alert('There Is An Error, Please Check That Everything Is Correct On Your Form')
-            });
+    
+            await axios.post(backendUrl, formDataToSend, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+              })
+                .then(res => {
+                    console.log('axios response:', res);
+                    alert('Your Form Have Been Submitted Successfully')
+                    location.reload();
+                })
+                .catch(err => {
+                    console.error('axios error:', err);
+                    alert('There Is An Error, Please Check That Everything Is Correct On Your Form')
+                }); 
+            } else {
+                setShowPreview(true)
+            }
+        
     };
 
     const [academicQualificationData, setAcademicQualificationData] = useState({});
